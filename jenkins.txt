@@ -1,0 +1,51 @@
+
+Jenkins:
+
+
+curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins -y
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+systemctl status jenkins
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+yum install git -y
+
+yum install wget -y
+
+mkdir /opt/maven
+cd /opt/maven
+wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+tar -zxvf apache*
+
+echo "export M2_HOME=/opt/maven/apache-maven-3.6.1" ~/.bash_profile
+echo "export PATH=$PATH:$M2_HOME/bin" ~/.bash_profile
+
+
+hostnamectl set-hostname Ansible.stackj.club
+echo "172.31.27.63 Ansible.stackj.club ansible" >>/etc/hosts
+
+
+hostnamectl set-hostname Docker.stackj.club
+echo "172.31.16.29 Docker.stackj.club Docker" >>/etc/hosts
+
+hostnamectl set-hostname Tomcat.stackj.club
+echo "172.31.19.127 Tomcat.stackj.club Tomcat" >>/etc/hosts
+
+mkdir /opt/tomcat8
+cd /opt/tomcat8
+wget https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+tar -zxvf apach*
+
+echo "export TOMCAT_HOME=/opt/tomcat8/apache-tomcat-8.5.40" >> ~/.bash_profile
+echo "export PATH=$PATH:TOMCAT_HOME/bin" >> ~/.bash_profile
+chmod -R 755 /opt/tomcat8/apache-tomcat-8.5.40/bin
+ln -s /opt/tomcat8/apache-tomcat-8.5.40/bin/startup.sh /usr/local/sbin/tomcatup
+ln -s /opt/tomcat8/apache-tomcat-8.5.40/bin/shutdown.sh /usr/local/sbin/tomcatdown
+
+yum install java-1.8* -y
+
+echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64" >> ~/.bash_profile
+echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bash_profile

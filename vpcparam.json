@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "VPCCIDR",
+    "ParameterValue": "10.1.0.0/16"
+  }, 
+  {
+    "ParameterKey": "PuplicSubnet1",
+    "ParameterValue": "10.1.10.0/24"
+  },
+  {
+    "ParameterKey": "PrivateSubnet1",
+    "ParameterValue": "10.1.20.0/24"
+  },
+  {
+    "ParameterKey": "PrivateSubnet2",
+    "ParameterValue": "10.1.30.0/24"
+  }
+]
